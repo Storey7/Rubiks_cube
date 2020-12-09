@@ -10,9 +10,9 @@ public:
 	void update();
 	void draw();
 
-	void rotateZ();
-	void rotateY();
-	void rotateX();
+	void rotateZ(int dir);
+	void rotateY(int dir);
+	void rotateX(int dir);
 
 	ofVec3f pos;
 	ofMatrix3x3 matrix;

@@ -36,24 +36,33 @@ void Cubie::draw()
 	ofPopMatrix();
 }
 
-void Cubie::rotateZ()
+void Cubie::rotateZ(int dir)
 {
 	ofPushMatrix();
-	box.rotateDeg(90, {0,0,1});
+	if(dir == 1)
+		box.rotateDeg(90, {0,0,1});
+	if (dir == -1)
+		box.rotateDeg(-90, { 0,0,1 });
 	ofPopMatrix();
 }
 
-void Cubie::rotateY()
+void Cubie::rotateY(int dir)
 {
 	ofPushMatrix();
-	box.rotateDeg(90, { 0,1,0 });
+	if (dir == 1)
+		box.rotateDeg(90, { 0,1,0 });
+	if (dir == -1)
+		box.rotateDeg(-90, { 0,1,0 });
 	ofPopMatrix();
 }
 
-void Cubie::rotateX()
+void Cubie::rotateX(int dir)
 {
 	ofPushMatrix();
-	box.rotateDeg(90, { 1,0,0 });
+	if (dir == 1)
+		box.rotateDeg(90, { 1,0,0 });
+	if (dir == -1)
+		box.rotateDeg(-90, { 1,0,0});
 	ofPopMatrix();
 }
 

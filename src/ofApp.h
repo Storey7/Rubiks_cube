@@ -24,9 +24,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		void turnZ();
-		void turnY();
-		void turnX();
+		void turnZ(int index, int dir);
+		void turnY(int index, int dir);
+		void turnX(int index, int dir);
 		
 		ofEasyCam cam;
 

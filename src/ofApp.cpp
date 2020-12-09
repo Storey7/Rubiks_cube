@@ -51,46 +51,100 @@ void ofApp::draw(){
 
 }
 
-void ofApp::turnZ() {
+void ofApp::turnZ(int index, int dir) {
 	for (int i = 0; i < cube.size(); i++) {
-		if (roundf(cube[i].pos.z) == 1)
+		if (roundf(cube[i].pos.z) == index)
 		{
-			cube[i].rotateZ();
-			cube[i].pos.rotate(90, { 0,0,1 });
+			if (dir == 1) {
+				cube[i].rotateZ(dir);
+				cube[i].pos.rotate(90, { 0,0,1 });
+			}
+			if (dir == -1) {
+				cube[i].rotateZ(dir);
+				cube[i].pos.rotate(-90, { 0,0,1 });
+			}
 		}
 	}
 }
 
-void ofApp::turnY() {
+void ofApp::turnY(int index, int dir) {
 	for (int i = 0; i < cube.size(); i++) {
-		if (roundf(cube[i].pos.y) == 1)
+		if (roundf(cube[i].pos.y) == index)
 		{
-			cube[i].pos.rotate(90, { 0,1,0});
-			cube[i].rotateY();
+			if (dir == 1) {
+				cube[i].rotateY(dir);
+				cube[i].pos.rotate(90, { 0,1,0 });
+			}
+			if (dir == -1) {
+				cube[i].rotateY(dir);
+				cube[i].pos.rotate(-90, { 0,1,0 });
+			}
 		}
 	}
 }
 
-void ofApp::turnX() {
+void ofApp::turnX(int index, int dir) {
 	for (int i = 0; i < cube.size(); i++) {
-		if (roundf(cube[i].pos.x) == 1)
+		if (roundf(cube[i].pos.x) == index)
 		{
-			cube[i].pos.rotate(90, { 1,0,0 });
-			cube[i].rotateX();
+			if (dir == 1) {
+				cube[i].rotateX(dir);
+				cube[i].pos.rotate(90, { 1,0,0 });
+			}
+			if (dir == -1) {
+				cube[i].rotateX(dir);
+				cube[i].pos.rotate(-90, { 1,0,0 });
+			}
 		}
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == 'z') {
-		turnZ();
+	if (key == 'F') {
+		turnZ(1,1);
 	}
-	if (key == 'y') {
-		turnY();
+	if (key == 'f') {
+		turnZ(1, -1);
 	}
-	if (key == 'x') {
-		turnX();
+	if (key == 'B') {
+		turnZ(-1, -1);
+	}
+	if (key == 'b') {
+		turnZ(-1, 1);
+	}
+
+	if (key == 'U') {
+		turnY(1,1);
+	}
+	if (key == 'u') {
+		turnY(1, -1);
+	}
+	if (key == 'D') {
+		turnY(-1, -1);
+	}
+	if (key == 'd') {
+		turnY(-1, 1);
+	}
+
+	if (key == 'L') {
+		turnX(-1,-1);
+	}
+	if (key == 'l') {
+		turnX(-1, 1);
+	}
+	if (key == 'R') {
+		turnX(1, 1);
+	}
+	if (key == 'r') {
+		turnX(1, -1);
+	}
+
+	if (key == 'm') {
+		turnX(0, 1);
+	}
+	if (key == 'M') {
+		turnX(0, -1);
 	}
 }
 
