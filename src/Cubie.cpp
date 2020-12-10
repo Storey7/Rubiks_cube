@@ -45,14 +45,21 @@ void Cubie::rotate(int dir, ofVec3f axis) {
 	pos.rotate(dir * 90, axis);
 }
 
-void Cubie::animateRotationZ(int dir)
+void Cubie::animateRotation(int dir, ofVec3f axis)
 {
+	angle = 0;
+	float speed = 1;
+
 	while (angle <= 90) {
-		box.rotateDeg(dir*.1, { 0,0,1 });
-		angle += .1;
+		box.rotateDeg(dir * 90, axis);
+		pos.rotate(dir * 90, axis);
+
+		//box.draw();
+
+		angle += speed;
 
 		if (angle > 90) {
-			box.rotateDeg(-dir * .1, { 0,0,1 });
+			box.rotateDeg(-dir * 90-speed, axis);
 			break;
 		}
 	}

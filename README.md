@@ -3,6 +3,8 @@
 A rubiks cube rendering built using the OpenFrameworks toolkit for C++.
 I hope to eventually include a randomiser, move parser and solver, as well as the ability to render larger cubes. 
 
+![Cube image](images/cube.png)
+
 ## Done 
 Cube rendering and basic face rotation 
 

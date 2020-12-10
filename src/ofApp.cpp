@@ -3,9 +3,10 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	int dim = 3;
-	float cubieSize = 50.0f;
+	assert(dim % 2 == 1);
+
 	ofSetVerticalSync(true);
-	cubeSize = cubieSize * dim;
+	cubeSize = floor(dim / 2.0);
 
 	// this uses depth information for occlusion
 	// rather than always drawing things on top of each other
@@ -14,12 +15,13 @@ void ofApp::setup(){
 	// draw the ofBox outlines with some weight
 	ofSetLineWidth(.3);
 
-	for (int i = -1; i <= 1; i++) {
-		for (int j = -1; j <= 1; j++) {
-			for (int k = -1; k <= 1; k++) {
-				//ofTranslate(x,y,z)
-				//cube.push_back(Cubie(i*cubieSize, j * cubieSize, k * cubieSize, cubieSize));
-				cube.push_back(Cubie(i, j, k));
+	//Only able to build odd number cubes for now. 
+	for (int i = -cubeSize; i <= cubeSize; i++) {
+		for (int j = -cubeSize; j <= cubeSize; j++) {
+			for (int k = -cubeSize; k <= cubeSize; k++) {
+				if(abs(i) == cubeSize || abs(j) == cubeSize || abs(k) == cubeSize)
+					//only render outer cubies
+					cube.push_back(Cubie(i, j, k));
 			}
 		}
 	}
@@ -37,7 +39,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	ofBackground(0, 0, 0);
+	ofBackground(120);
 
 	ofPushMatrix();
 	cam.begin();
@@ -55,7 +57,8 @@ void ofApp::turnZ(int index, int dir) {
 	for (int i = 0; i < cube.size(); i++) {
 		if (roundf(cube[i].pos.z) == index)
 		{
-			cube[i].rotate(dir, { 0,0, 1 });
+			cube[i].rotate(dir, { 0,0,1 });
+			//cube[i].animateRotation(dir, { 0,0,1 });
 		}
 	}
 }

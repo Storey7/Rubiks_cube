@@ -12,7 +12,7 @@ public:
 
 	void rotate(int dir, ofVec3f axis);
 
-	void animateRotationZ(int dir);
+	void animateRotation(int dir, ofVec3f axis);
 
 	float angle;
 	ofVec3f pos;
