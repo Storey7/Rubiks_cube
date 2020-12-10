@@ -37,7 +37,7 @@
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="Cubie.cpp">
+    <ClCompile Include="src\Cubie.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="Cubie.h">
+    <ClInclude Include="src\Cubie.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include <vector>
-#include "../Cubie.h"
+#include "Cubie.h"
 #include <vector>
 
 class ofApp : public ofBaseApp{
