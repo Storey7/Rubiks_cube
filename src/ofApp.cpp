@@ -55,14 +55,7 @@ void ofApp::turnZ(int index, int dir) {
 	for (int i = 0; i < cube.size(); i++) {
 		if (roundf(cube[i].pos.z) == index)
 		{
-			if (dir == 1) {
-				cube[i].rotateZ(dir);
-				cube[i].pos.rotate(90, { 0,0,1 });
-			}
-			if (dir == -1) {
-				cube[i].rotateZ(dir);
-				cube[i].pos.rotate(-90, { 0,0,1 });
-			}
+			cube[i].rotate(dir, { 0,0, 1 });
 		}
 	}
 }
@@ -71,14 +64,7 @@ void ofApp::turnY(int index, int dir) {
 	for (int i = 0; i < cube.size(); i++) {
 		if (roundf(cube[i].pos.y) == index)
 		{
-			if (dir == 1) {
-				cube[i].rotateY(dir);
-				cube[i].pos.rotate(90, { 0,1,0 });
-			}
-			if (dir == -1) {
-				cube[i].rotateY(dir);
-				cube[i].pos.rotate(-90, { 0,1,0 });
-			}
+			cube[i].rotate(dir, { 0,1,0 });
 		}
 	}
 }
@@ -87,14 +73,7 @@ void ofApp::turnX(int index, int dir) {
 	for (int i = 0; i < cube.size(); i++) {
 		if (roundf(cube[i].pos.x) == index)
 		{
-			if (dir == 1) {
-				cube[i].rotateX(dir);
-				cube[i].pos.rotate(90, { 1,0,0 });
-			}
-			if (dir == -1) {
-				cube[i].rotateX(dir);
-				cube[i].pos.rotate(-90, { 1,0,0 });
-			}
+			cube[i].rotate(dir, { 1,0,0 });
 		}
 	}
 }

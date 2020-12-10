@@ -11,8 +11,12 @@ Cubie::~Cubie()
 
 void Cubie::setup()
 {
+	angle = 0;
+
 	int length = 1;
 	box.set(length);
+
+	//These were set backwards nad may not correspond to their names. They LOOK right though. 
 	box.setSideColor(box.SIDE_FRONT, ofColor::green);
 	box.setSideColor(box.SIDE_LEFT, ofColor::orange);
 	box.setSideColor(box.SIDE_RIGHT, ofColor::red);
@@ -36,33 +40,21 @@ void Cubie::draw()
 	ofPopMatrix();
 }
 
-void Cubie::rotateZ(int dir)
-{
-	ofPushMatrix();
-	if(dir == 1)
-		box.rotateDeg(90, {0,0,1});
-	if (dir == -1)
-		box.rotateDeg(-90, { 0,0,1 });
-	ofPopMatrix();
+void Cubie::rotate(int dir, ofVec3f axis) {
+	box.rotateDeg(dir * 90, axis);
+	pos.rotate(dir * 90, axis);
 }
 
-void Cubie::rotateY(int dir)
+void Cubie::animateRotationZ(int dir)
 {
-	ofPushMatrix();
-	if (dir == 1)
-		box.rotateDeg(90, { 0,1,0 });
-	if (dir == -1)
-		box.rotateDeg(-90, { 0,1,0 });
-	ofPopMatrix();
-}
+	while (angle <= 90) {
+		box.rotateDeg(dir*.1, { 0,0,1 });
+		angle += .1;
 
-void Cubie::rotateX(int dir)
-{
-	ofPushMatrix();
-	if (dir == 1)
-		box.rotateDeg(90, { 1,0,0 });
-	if (dir == -1)
-		box.rotateDeg(-90, { 1,0,0});
-	ofPopMatrix();
+		if (angle > 90) {
+			box.rotateDeg(-dir * .1, { 0,0,1 });
+			break;
+		}
+	}
 }
 
