@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include <vector>
 #include "Cubie.h"
+#include "Cube.h"
 #include <vector>
 
 class ofApp : public ofBaseApp{
@@ -23,14 +23,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-
-		void turnZ(int index, int dir);
-		void turnY(int index, int dir);
-		void turnX(int index, int dir);
 		
 		ofEasyCam cam;
-
-		vector<Cubie> cube;
 		ofMatrix3x3 matrix;
+
+		Cube cube;
 		float cubeSize;
 };

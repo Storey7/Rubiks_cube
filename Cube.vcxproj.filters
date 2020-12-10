@@ -40,6 +40,9 @@
     <ClCompile Include="src\Cubie.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Cube.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -96,6 +99,9 @@
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
     <ClInclude Include="src\Cubie.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cube.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
