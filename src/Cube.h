@@ -15,6 +15,9 @@ public:
 	void turnY(int index, int dir);
 	void turnX(int index, int dir);
 
+	void randomiseCube(int turns);
+	void readAlgorithm(string path);
+
 	void applyMove(char move);
 
 	int dim;

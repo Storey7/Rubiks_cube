@@ -6,10 +6,11 @@ I hope to eventually include a randomiser, move parser and solver, as well as th
 ![Cube image](images/cube.png)
 
 ## Done 
-Cube rendering and basic face rotation 
+* Cube rendering and basic face rotation 
+* Complete face rotations
+* Randomise cube function
 
 ## Todo
-* Complete face rotations
 * Rotation animation
 * Ability to parse cube notation
 * CFOP based solver

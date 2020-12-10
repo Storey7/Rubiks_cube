@@ -25,8 +25,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 		ofEasyCam cam;
-		ofMatrix3x3 matrix;
 
 		Cube cube;
-		float cubeSize;
 };

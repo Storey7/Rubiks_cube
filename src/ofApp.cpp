@@ -15,6 +15,8 @@ void ofApp::setup(){
 	
 	int dim = 3;
 	cube.setup(dim);
+
+	//cube.randomiseCube(20);
 }
 
 //--------------------------------------------------------------

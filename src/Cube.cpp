@@ -48,7 +48,6 @@ void Cube::turnZ(int index, int dir)
 		if (roundf(cube[i].pos.z) == index)
 		{
 			cube[i].rotate(dir, { 0,0,1 });
-			//cube[i].animateRotation(dir, { 0,0,1 });
 		}
 	}
 }
@@ -71,6 +70,21 @@ void Cube::turnX(int index, int dir)
 			cube[i].rotate(dir, { 1,0,0 });
 		}
 	}
+}
+
+void Cube::randomiseCube(int turns)
+{
+	char moves[] = { 'u', 'U', 'l', 'L', 'r', 'R', 'd', 'D', 'f', 'F', 'b', 'B' };
+	for (int i = 0; i < turns; i++)
+	{
+		int index = floor(ofRandom(0, 12));
+		applyMove(moves[index]);
+	}
+}
+
+void Cube::readAlgorithm(string path)
+{
+	//TODO
 }
 
 void Cube::applyMove(char move)
