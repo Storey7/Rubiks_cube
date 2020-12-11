@@ -46,8 +46,8 @@ void Cubie::draw()
 }
 
 void Cubie::rotate(int dir, ofVec3f axis, int angle) {
-	int speed = 2;
 	currentAngle = (currentAngle + dir*angle) % 360;
+	//currentAngle = (currentAngle + angle) % 360;
 	
 	if (axis == ofVec3f{0, 0, 1}) {
 		zAngle = currentAngle;

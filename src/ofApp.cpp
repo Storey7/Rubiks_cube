@@ -11,10 +11,10 @@ void ofApp::setup(){
 
 	ofBackground(120);
 	gui.setup();
-	gui.add(zRotation.setup("Z Rotation", "0"));
+	gui.add(zRotation.setup("Front rotation", "0"));
 	gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
 	gui.setTextColor(ofColor::white);
-	//cube.randomiseCube(20);
+	cube.randomiseCube(20);
 }
 
 //--------------------------------------------------------------
@@ -44,7 +44,7 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	cube.applyMove(key);
+	cube.movesQueue.push_back(key);
 }
 
 //--------------------------------------------------------------

@@ -19,7 +19,11 @@ void Cube::setup(int _dim)
 	for (int i = -cubeSize; i <= cubeSize; i++) {
 		for (int j = -cubeSize; j <= cubeSize; j++) {
 			for (int k = -cubeSize; k <= cubeSize; k++) {
-				if (abs(i) == cubeSize || abs(j) == cubeSize || abs(k) == cubeSize)
+				if (abs(i) == cubeSize ||
+					abs(j) == cubeSize ||
+					abs(k) == cubeSize ||
+					(i == 0 && j == 0 && k == 0))
+
 					//only render outer cubies
 					cube.push_back(Cubie(i, j, k));
 			}
@@ -29,76 +33,58 @@ void Cube::setup(int _dim)
 	for (int i = 0; i < cube.size(); i++) {
 		cube[i].setup();
 	}
+	
+	moving = 0;
 }
 
 
 void Cube::update()
 { 
-	//Need to find some way of blocking so that only 1 update can happen at a time. 
-	for (int i = 0; i < cube.size(); i++) {
-		if (cube[i].pos.x == 0 && cube[i].pos.y == 0){
-			if (cube[i].zAngle % 90 != 0) {
-				animateZ(cube[i].pos.z, cube[i].zAngle, 1);
-				break;
+	switch(moving){
+		case 0:
+			if (movesQueue.size() > 0) {
+				char move = movesQueue.front();
+				movesQueue.pop_front();
+				applyMove(move);
 			}
-		}
-		if (cube[i].pos.x == 0 && cube[i].pos.z == 0) {
-			if (cube[i].yAngle % 90 != 0) {
-				animateY(cube[i].pos.y, cube[i].yAngle, 1);
-				break;
+			break;
+		case 1:
+			for (int i = 0; i < cube.size(); i++) {
+				if (cube[i].pos.x == 0 && cube[i].pos.y == 0) {
+					if (cube[i].zAngle % 90 != 0) {
+						animateZ(cube[i].pos.z, cube[i].zAngle, cube[i].currentDir);
+						break;
+					}
+					moving = 0;
+				}
 			}
-		}
-		if (cube[i].pos.y == 0 && cube[i].pos.z== 0) {
-			if (cube[i].xAngle % 90 != 0) {
-				animateX(cube[i].pos.x, cube[i].xAngle, 1);
-				break;
+			break;
+		case 2:
+			for (int i = 0; i < cube.size(); i++) {
+				if (cube[i].pos.x == 0 && cube[i].pos.z == 0) {
+					if (cube[i].yAngle % 90 != 0) {
+						animateY(cube[i].pos.y, cube[i].yAngle, cube[i].currentDir);
+						break;
+					}
+					moving = 0;
+				}
 			}
-		}
-	}
+			break;
+		case 3:
+			for (int i = 0; i < cube.size(); i++) {
+				if (cube[i].pos.y == 0 && cube[i].pos.z == 0) {
+					if (cube[i].xAngle % 90 != 0) {
+						animateX(cube[i].pos.x, cube[i].xAngle, cube[i].currentDir);
+						break;
+					}
+					moving = 0;
+				}
+			}
+			break;
+		default:
+			cout << "OH NO!" << endl;
+			}
 }
-
-void Cube::animateZ(int index, int _zAngle, int dir) {
-	int zAxis = _zAngle;
-	int zModulo = zAxis % 90;
-
-	if (zModulo != 0) {
-		if (zModulo > 0) {
-			turnZ(index, 1);
-		}
-		if (zModulo < 0) {
-			turnZ(index, -1);
-		}
-	}
-}
-
-void Cube::animateY(int index, int _yAngle, int dir) {
-	int yAxis = _yAngle;
-	int yModulo = yAxis % 90;
-
-	if (yModulo != 0) {
-		if (yModulo > 0) {
-			turnY(index, 1);
-		}
-		if (yModulo < 0) {
-			turnY(index, -1);
-		}
-	}
-}
-
-void Cube::animateX(int index, int _xAngle, int dir) {
-	int xAxis = _xAngle;
-	int xModulo = xAxis % 90;
-
-	if (xModulo != 0) {
-		if (xModulo > 0) {
-			turnX(index, 1);
-		}
-		if (xModulo < 0) {
-			turnX(index, -1);
-		}
-	}
-}
-
 
 void Cube::draw()
 {
@@ -107,13 +93,45 @@ void Cube::draw()
 	}
 }
 
+//This all needs to be refactored badly. Since I started with ortoganol only turns, the call stack is weird.
+//Turns are "started off" using the turn{ZYX} methods, and then the update function repeatedly calls these animate functions to get the turn
+//from 1-90 degrees. Not ideal. 
+void Cube::animateZ(int index, int _zAngle, int dir) {
+	int zAxis = _zAngle;
+	int zModulo = zAxis % 90;
+
+	if (zModulo != 0) {
+		turnZ(index, dir);	
+	}
+}
+void Cube::animateY(int index, int _yAngle, int dir) {
+	int yAxis = _yAngle;
+	int yModulo = yAxis % 90;
+
+	if (yModulo != 0) {
+		turnY(index, dir);
+	}
+}
+void Cube::animateX(int index, int _xAngle, int dir) {
+	int xAxis = _xAngle;
+	int xModulo = xAxis % 90;
+
+	if (xModulo != 0) {
+		turnX(index, dir);
+	}
+}
+
+
+
 void Cube::turnZ(int index, int dir)
 {
 	
 	for (int i = 0; i < cube.size(); i++) {
 		if (roundf(cube[i].pos.z) == index)
 		{
-			cube[i].rotate(dir, { 0,0,1 }, 1);
+			moving = 1;
+			cube[i].currentDir = dir;
+			cube[i].rotate(dir, { 0,0,1 }, 5);
 		}
 	}
 }
@@ -123,7 +141,9 @@ void Cube::turnY(int index, int dir)
 	for (int i = 0; i < cube.size(); i++) {
 		if (roundf(cube[i].pos.y) == index)
 		{
-			cube[i].rotate(dir, { 0,1,0 }, 1);
+			moving = 2;
+			cube[i].currentDir = dir;
+			cube[i].rotate(dir, { 0,1,0 }, 5);
 		}
 	}
 }
@@ -133,7 +153,9 @@ void Cube::turnX(int index, int dir)
 	for (int i = 0; i < cube.size(); i++) {
 		if (roundf(cube[i].pos.x) == index)
 		{
-			cube[i].rotate(dir, { 1,0,0 }, 1);
+			moving = 3;
+			cube[i].currentDir = dir;
+			cube[i].rotate(dir, { 1,0,0 }, 5);
 		}
 	}
 }
@@ -144,7 +166,9 @@ void Cube::randomiseCube(int turns)
 	for (int i = 0; i < turns; i++)
 	{
 		int index = floor(ofRandom(0, 12));
-		applyMove(moves[index]);
+		char move = moves[index];
+		movesQueue.push_back(move);
+		//applyMove(move);
 	}
 }
 
@@ -157,7 +181,6 @@ void Cube::applyMove(char move)
 {
 	switch (move) {
 	case 'F':
-
 		turnZ(1, 1);
 		break;
 	case 'f':
@@ -196,11 +219,12 @@ void Cube::applyMove(char move)
 		turnX(1, -1);
 		break;
 
-	case 'm':
+	//These break the animation as they move the centres. 
+	/*case 'm':
 		turnX(0, 1);
 		break;
 	case 'M':
 		turnX(0, -1);
-		break;
+		break;*/
 	}
 }

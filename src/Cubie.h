@@ -16,6 +16,7 @@ public:
 	
 	int angle;
 	int currentAngle;
+	int currentDir;
 	int zAngle;
 	int yAngle;
 	int xAngle;

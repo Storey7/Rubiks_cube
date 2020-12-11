@@ -9,9 +9,9 @@ I hope to eventually include a randomiser, move parser and solver, as well as th
 * Cube rendering and basic face rotation 
 * Complete face rotations
 * Randomise cube function
+* Rotation animation
 
 ## Todo
-* Rotation animation
 * Ability to parse cube notation
 * CFOP based solver
 * Abstaction for bigger NxN cubes

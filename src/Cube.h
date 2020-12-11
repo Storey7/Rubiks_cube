@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "Cubie.h"
+#include <deque>
 
 class Cube {
 public:
@@ -25,7 +26,9 @@ public:
 	void applyMove(char move);
 
 	int dim;
+	int moving; //0-not moving, 1 == ZFace, 2 == Y Face, 3 == XFace.
 
 	vector<Cubie> cube;
+	deque<char> movesQueue;
 	float cubeSize;
 };
