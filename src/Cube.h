@@ -17,6 +17,10 @@ public:
 
 	void randomiseCube(int turns);
 	void readAlgorithm(string path);
+	
+	void animateZ(int index, int dir, int _zAngle);
+	void animateY(int index, int dir, int _yAngle);
+	void animateX(int index, int dir, int _xAngle);
 
 	void applyMove(char move);
 

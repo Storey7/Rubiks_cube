@@ -12,6 +12,10 @@ Cubie::~Cubie()
 void Cubie::setup()
 {
 	angle = 0;
+	currentAngle = 0;
+	zAngle = 0;
+	yAngle = 0;
+	xAngle = 0;
 
 	int length = 1;
 	box.set(length);
@@ -36,32 +40,32 @@ void Cubie::draw()
 	ofSetLineWidth(1);
 	ofTranslate(pos);
 	box.draw();
+
 	//box.drawWireframe();
 	ofPopMatrix();
 }
 
-void Cubie::rotate(int dir, ofVec3f axis) {
-	box.rotateDeg(dir * 90, axis);
-	pos.rotate(dir * 90, axis);
+void Cubie::rotate(int dir, ofVec3f axis, int angle) {
+	int speed = 2;
+	currentAngle = (currentAngle + dir*angle) % 360;
+	
+	if (axis == ofVec3f{0, 0, 1}) {
+		zAngle = currentAngle;
+	}
+	else if (axis == ofVec3f{0, 1, 0}) {
+		yAngle = currentAngle;
+	}
+	else if (axis == ofVec3f{1, 0, 0}) {
+		xAngle = currentAngle;
+	}
+	
+	box.rotateDeg(dir * angle, axis);
+	pos.rotate(dir * angle, axis);
 }
+
 
 void Cubie::animateRotation(int dir, ofVec3f axis)
 {
-	angle = 0;
-	float speed = 1;
 
-	while (angle <= 90) {
-		box.rotateDeg(dir * 90, axis);
-		pos.rotate(dir * 90, axis);
-
-		//box.draw();
-
-		angle += speed;
-
-		if (angle > 90) {
-			box.rotateDeg(-dir * 90-speed, axis);
-			break;
-		}
-	}
 }
 

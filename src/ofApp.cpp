@@ -5,37 +5,40 @@ void ofApp::setup(){
 
 	ofSetVerticalSync(true);
 	ofSetWindowTitle("Rubiks Cube");
-
-	// this uses depth information for occlusion
-	// rather than always drawing things on top of each other
-	ofEnableDepthTest();
-
-	// draw the ofBox outlines with some weight
-	ofSetLineWidth(.3);
 	
 	int dim = 3;
 	cube.setup(dim);
 
+	ofBackground(120);
+	gui.setup();
+	gui.add(zRotation.setup("Z Rotation", "0"));
+	gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+	gui.setTextColor(ofColor::white);
 	//cube.randomiseCube(20);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	zRotation = ofToString(cube.cube[5].currentAngle);
+	cube.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	ofBackground(120);
+	ofBackgroundGradient(ofColor::gray, color);
+	ofEnableDepthTest();
 
 	ofPushMatrix();
-	cam.begin();
+	cam.begin(); 
 	ofScale(50);
 	cube.draw();
 	
 	cam.end();
 	ofPopMatrix();
+	ofDisableDepthTest();
+
+	gui.draw();
 }
 
 

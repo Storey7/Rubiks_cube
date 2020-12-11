@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "Cubie.h"
 #include "Cube.h"
 #include <vector>
@@ -25,6 +26,9 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 		ofEasyCam cam;
+		ofxPanel gui;
+		ofxLabel zRotation;
+		ofxColorSlider color;
 
 		Cube cube;
 };

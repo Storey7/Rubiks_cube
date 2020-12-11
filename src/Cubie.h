@@ -10,13 +10,17 @@ public:
 	void update();
 	void draw();
 
-	void rotate(int dir, ofVec3f axis);
+	void rotate(int dir, ofVec3f axis, int angle);
 
 	void animateRotation(int dir, ofVec3f axis);
+	
+	int angle;
+	int currentAngle;
+	int zAngle;
+	int yAngle;
+	int xAngle;
 
-	float angle;
 	ofVec3f pos;
-	ofMatrix3x3 matrix;
 
 	ofBoxPrimitive box;
 
