@@ -2,19 +2,20 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofBackground(120);
 
 	ofSetVerticalSync(true);
 	ofSetWindowTitle("Rubiks Cube");
 	
-	int dim = 3;
-	cube.setup(dim);
-
-	ofBackground(120);
 	gui.setup();
 	gui.add(zRotation.setup("Front rotation", "0"));
 	gui.add(color.setup("color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
 	gui.setTextColor(ofColor::white);
-	cube.randomiseCube(20);
+	
+	int dim = 3;
+	cube.setup(dim);
+	//cube.randomiseCube(100);
+	cube.readAlgorithm("../algs/moves_list.txt");
 }
 
 //--------------------------------------------------------------
@@ -31,9 +32,11 @@ void ofApp::draw(){
 
 	ofPushMatrix();
 	cam.begin(); 
+	ofFill();
 	ofScale(50);
 	cube.draw();
 	
+	ofNoFill();
 	cam.end();
 	ofPopMatrix();
 	ofDisableDepthTest();
@@ -44,6 +47,8 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+	if (key == ' ')
+		cube.moving = 0;
 	cube.movesQueue.push_back(key);
 }
 

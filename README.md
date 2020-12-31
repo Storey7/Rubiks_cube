@@ -1,18 +1,17 @@
 # Rubiks Cube visualisation
 
-A rubiks cube rendering built using the OpenFrameworks toolkit for C++.
-I hope to eventually include a randomiser, move parser and solver, as well as the ability to render larger cubes. 
+A Rubiks cube rendering built using the OpenFrameworks toolkit for C++. Each cube face can be controlled using the keyboard, and a file with a string of moves in cube notation can be added also. 
+I hope to eventually include a solver, as well as the ability to render larger cubes. 
 
 ![Cube image](images/cube.png)
 
 ## Done 
 * Cube rendering and basic face rotation 
-* Complete face rotations
+* Animated face rotations
 * Randomise cube function
-* Rotation animation
+* Ability to parse cube notation
 
 ## Todo
-* Ability to parse cube notation
 * CFOP based solver
 * Abstaction for bigger NxN cubes
 

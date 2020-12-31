@@ -18,15 +18,18 @@ void Cubie::setup()
 	xAngle = 0;
 
 	int length = 1;
-	box.set(length);
+	box.set(length*.95);
+	borderBox.set(length);
+	borderBox.setMode(ofPrimitiveMode::OF_PRIMITIVE_LINES);
 
-	//These were set backwards nad may not correspond to their names. They LOOK right though. 
+	//These were set backwards and may not correspond to their names. They LOOK right though. 
 	box.setSideColor(box.SIDE_FRONT, ofColor::green);
 	box.setSideColor(box.SIDE_LEFT, ofColor::orange);
 	box.setSideColor(box.SIDE_RIGHT, ofColor::red);
 	box.setSideColor(box.SIDE_TOP, ofColor::yellow);
 	box.setSideColor(box.SIDE_BACK, ofColor::blue);
 	box.setSideColor(box.SIDE_BOTTOM, ofColor::white);
+	
 }
 
 void Cubie::update()
@@ -37,9 +40,11 @@ void Cubie::draw()
 {
 	ofPushMatrix();
 
-	ofSetLineWidth(1);
+	ofSetLineWidth(2);
 	ofTranslate(pos);
+	//ofFill();
 	box.draw();
+	
 
 	//box.drawWireframe();
 	ofPopMatrix();

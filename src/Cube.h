@@ -23,6 +23,9 @@ public:
 	void animateY(int index, int dir, int _yAngle);
 	void animateX(int index, int dir, int _xAngle);
 
+	void getState();
+
+	void notationToKeyboard(string moveNotation);
 	void applyMove(char move);
 
 	int dim;

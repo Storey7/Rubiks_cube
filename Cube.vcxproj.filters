@@ -111,4 +111,10 @@
   <ItemGroup>
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\algs\moves_list.txt">
+      <Filter>src</Filter>
+    </Text>
+    <Text Include="algs\moves_list.txt" />
+  </ItemGroup>
 </Project>
